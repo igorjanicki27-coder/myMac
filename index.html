@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dev Portfolio</title>
+    <style>
+        /* --- 1. USTAWIENIA OGÓLNE I KOLORYSTYKA --- */
+        :root {
+            --bg-color: #1e1e2e;       /* Ciemne tło */
+            --sidebar-color: #252538;  /* Tło paska bocznego */
+            --text-color: #cdd6f4;     /* Jasny tekst */
+            --accent-color: #89b4fa;   /* Niebieski akcent */
+            --hover-color: #313244;    /* Kolor po najechaniu myszką */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- 2. PASEK BOCZNY (SIDEBAR) --- */
+        nav {
+            width: 250px;
+            background-color: var(--sidebar-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            border-right: 1px solid #333;
+        }
+
+        nav h2 {
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: var(--hover-color);
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        /* --- 3. GŁÓWNA TREŚĆ --- */
+        main {
+            margin-left: 250px; /* Tyle co szerokość paska */
+            padding: 40px;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Przełącznik języka w prawym górnym rogu */
+        .lang-switch-container {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+        }
+
+        #lang-btn {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        #lang-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* Sekcje */
+        section {
+            margin-bottom: 80px;
+            max-width: 800px;
+            padding-top: 20px; /* Offset dla kotwic */
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 10px; color: var(--accent-color); }
+        h2 { font-size: 2rem; border-bottom: 2px solid var(--sidebar-color); padding-bottom: 10px; }
+        p { line-height: 1.6; font-size: 1.1rem; opacity: 0.9; }
+
+        /* Karta Aplikacji */
+        .app-card {
+            background-color: var(--sidebar-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .app-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* --- 4. LOGIKA JĘZYKOWA (CSS) --- */
+        /* Jeśli body ma klasę 'lang-en', ukryj polskie teksty */
+        body.lang-en .pl { display: none; }
+        
+        /* Jeśli body ma klasę 'lang-pl', ukryj angielskie teksty */
+        body.lang-pl .en { display: none; }
+
+        /* Responsywność na telefony */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            nav { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #333; }
+            main { margin-left: 0; padding: 20px; }
+            .lang-switch-container { top: 10px; right: 10px; }
+        }
+    </style>
+</head>
+<body class="lang-en"> <nav>
+        <h2>DevApps</h2>
+        <a href="#home">Home</a>
+        <a href="#myssh">mySSH</a>
+        <a href="#myip">myIP</a>
+        <a href="#myejector">myEjector</a>
+        <a href="#contact">
+            <span class="en">Contact</span>
+            <span class="pl">Kontakt</span>
+        </a>
+    </nav>
+
+    <main>
+        <div class="lang-switch-container">
+            <button id="lang-btn" onclick="toggleLanguage()">🇵🇱 PL</button>
+        </div>
+
+        <section id="home">
+            <h1>
+                <span class="en">Welcome</span>
+                <span class="pl">Witaj</span>
+            </h1>
+            <p>
+                <span class="en">
+                    This is the home of my software projects. I build tools that simplify everyday developer tasks. 
+                    Feel free to explore and download my applications. Simplicity and efficiency are my main goals.
+                </span>
+                <span class="pl">
+                    To jest strona domowa moich projektów. Tworzę narzędzia, które ułatwiają codzienną pracę programisty.
+                    Zapraszam do przeglądania i pobierania moich aplikacji. Prostota i wydajność to moje główne cele.
+                </span>
+            </p>
+        </section>
+
+        <section id="myssh">
+            <h2>mySSH</h2>
+            <div class="app-card">
+                <p>
+                    <span class="en">A lightweight SSH client manager for quick connections.</span>
+                    <span class="pl">Lekki menedżer połączeń SSH dla szybkich logowań.</span>
+                </p>
+                <a href="#" class="download-btn">Download v1.0</a>
+            </div>
+        </section>
+
+        <section id="myip">
+            <h2>myIP</h2>
+            <div class="app-card">
+                <p>
+                    <span class="en">Instantly check your local and public IP address details.</span>
+                    <span class="pl">Sprawdź natychmiastowo swój lokalny i publiczny adres IP.</span>
+                </p>
+                <a href="#" class="download-btn">Download v1.0</a>
+            </div>
+        </section>
+
+        <section id="myejector">
+            <h2>myEjector</h2>
+            <div class="app-card">
+                <p>
+                    <span class="en">Safely eject USB drives with a single hotkey.</span>
+                    <span class="pl">Bezpieczne usuwanie dysków USB jednym skrótem klawiszowym.</span>
+                </p>
+                <a href="#" class="download-btn">Download v1.0</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>
+                <span class="en">Contact</span>
+                <span class="pl">Kontakt</span>
+            </h2>
+            <p>
+                Email: twoj-email@example.com <br>
+                GitHub: <a href="https://github.com/TWOJ_LOGIN" style="color: var(--accent-color);">github.com/TWOJ_LOGIN</a>
+            </p>
+        </section>
+    </main>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('lang-btn');
+
+            if (body.classList.contains('lang-en')) {
+                // Zmień na Polski
+                body.classList.replace('lang-en', 'lang-pl');
+                btn.innerHTML = '🌐 EN'; // Zmień ikonę przycisku na globus/EN
+            } else {
+                // Zmień na Angielski
+                body.classList.replace('lang-pl', 'lang-en');
+                btn.innerHTML = '🇵🇱 PL'; // Zmień ikonę przycisku na flagę PL
+            }
+        }
+    </script>
+</body>
+</html>
