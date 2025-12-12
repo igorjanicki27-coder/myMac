@@ -1,148 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dev Portfolio</title>
+    <title>myMac - Igor Janicki</title>
     <style>
-        /* --- 1. USTAWIENIA OGÓLNE I KOLORYSTYKA --- */
+        /* --- 1. USTAWIENIA OGÓLNE I STYL MACOS --- */
         :root {
-            --bg-color: #1e1e2e;       /* Ciemne tło */
-            --sidebar-color: #252538;  /* Tło paska bocznego */
-            --text-color: #cdd6f4;     /* Jasny tekst */
-            --accent-color: #89b4fa;   /* Niebieski akcent */
-            --hover-color: #313244;    /* Kolor po najechaniu myszką */
+            /* Paleta barw inspirowana macOS Dark Mode */
+            --bg-main: #1e1e1e;       /* Tło główne */
+            --bg-sidebar: #151516;    /* Ciemniejszy pasek boczny */
+            --border-color: #38383a;  /* Wyraźna linia oddzielająca */
+            --text-main: #f5f5f7;     /* Biel Apple */
+            --text-muted: #86868b;    /* Szary tekst poboczny */
+            --accent-color: #0A84FF;  /* Systemowy niebieski macOS */
+            --accent-hover: #0071e3;  /* Ciemniejszy niebieski po najechaniu */
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
             display: flex;
             min-height: 100vh;
         }
 
         /* --- 2. PASEK BOCZNY (SIDEBAR) --- */
         nav {
-            width: 250px;
-            background-color: var(--sidebar-color);
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            /* Wyraźna linia oddzielająca sekcje */
+            border-right: 1px solid var(--border-color); 
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            padding: 30px 20px;
             position: fixed;
             height: 100%;
-            border-right: 1px solid #333;
+            z-index: 100;
         }
 
         nav h2 {
-            color: var(--accent-color);
+            font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 40px;
-            text-align: center;
+            padding-left: 10px;
+            letter-spacing: 0.5px;
         }
 
         nav a {
-            color: var(--text-color);
+            color: var(--text-muted);
             text-decoration: none;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            transition: 0.3s;
-            font-weight: 500;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
         }
 
-        nav a:hover {
-            background-color: var(--hover-color);
-            color: var(--accent-color);
-            transform: translateX(5px);
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
         }
 
         /* --- 3. GŁÓWNA TREŚĆ --- */
         main {
-            margin-left: 250px; /* Tyle co szerokość paska */
-            padding: 40px;
+            margin-left: 260px;
+            padding: 60px 80px;
             width: 100%;
             position: relative;
         }
 
-        /* Przełącznik języka w prawym górnym rogu */
+        /* Przełącznik języka */
         .lang-switch-container {
             position: absolute;
-            top: 20px;
+            top: 30px;
             right: 40px;
         }
 
         #lang-btn {
-            background: none;
-            border: 1px solid var(--accent-color);
-            color: var(--text-color);
-            padding: 8px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
             cursor: pointer;
             border-radius: 20px;
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* Większa ikona flagi/globusa */
             transition: 0.3s;
+            line-height: 1;
         }
 
         #lang-btn:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent-color);
         }
 
         /* Sekcje */
         section {
-            margin-bottom: 80px;
+            /* Min-height sprawia, że każda sekcja zajmuje sporo miejsca, 
+               dzięki czemu nie zlewają się ze sobą */
+            min-height: 80vh; 
             max-width: 800px;
-            padding-top: 20px; /* Offset dla kotwic */
+            padding-top: 40px;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-color); /* Linia na dole sekcji */
+        }
+        
+        section:last-child { border-bottom: none; }
+
+        h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 20px; 
+            font-weight: 700;
+        }
+        
+        h2 { 
+            font-size: 2rem; 
+            color: var(--accent-color);
+            margin-bottom: 20px;
         }
 
-        h1 { font-size: 3rem; margin-bottom: 10px; color: var(--accent-color); }
-        h2 { font-size: 2rem; border-bottom: 2px solid var(--sidebar-color); padding-bottom: 10px; }
-        p { line-height: 1.6; font-size: 1.1rem; opacity: 0.9; }
+        p { 
+            line-height: 1.7; 
+            font-size: 1.1rem; 
+            color: #d1d1d6;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            margin-top: 40px;
+            font-style: italic;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
 
         /* Karta Aplikacji */
         .app-card {
-            background-color: var(--sidebar-color);
-            padding: 20px;
+            background-color: #2c2c2e;
+            padding: 30px;
             border-radius: 12px;
             margin-top: 20px;
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-
-        .app-card:hover {
-            border-color: var(--accent-color);
+            border: 1px solid var(--border-color);
         }
 
         .download-btn {
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
+            margin-top: 20px;
+            padding: 10px 25px;
             background-color: var(--accent-color);
-            color: var(--bg-color);
+            color: white;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
         }
 
-        /* --- 4. LOGIKA JĘZYKOWA (CSS) --- */
-        /* Jeśli body ma klasę 'lang-en', ukryj polskie teksty */
+        .download-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* --- LOGIKA JĘZYKOWA --- */
         body.lang-en .pl { display: none; }
-        
-        /* Jeśli body ma klasę 'lang-pl', ukryj angielskie teksty */
         body.lang-pl .en { display: none; }
 
-        /* Responsywność na telefony */
+        /* Responsywność */
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            nav { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #333; }
-            main { margin-left: 0; padding: 20px; }
-            .lang-switch-container { top: 10px; right: 10px; }
+            nav { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border-color); padding: 15px; }
+            main { margin-left: 0; padding: 30px 20px; }
+            section { min-height: auto; padding-top: 20px; }
         }
     </style>
 </head>
 <body class="lang-en"> <nav>
-        <h2>DevApps</h2>
-        <a href="#home">Home</a>
+        <h2>myMac</h2>
+        <a href="#home">
+            <span class="en">Home</span>
+            <span class="pl">Strona Główna</span>
+        </a>
         <a href="#myssh">mySSH</a>
         <a href="#myip">myIP</a>
         <a href="#myejector">myEjector</a>
@@ -154,34 +192,42 @@
 
     <main>
         <div class="lang-switch-container">
-            <button id="lang-btn" onclick="toggleLanguage()">🇵🇱 PL</button>
+            <button id="lang-btn" onclick="toggleLanguage()" title="Change Language">🇵🇱</button>
         </div>
 
         <section id="home">
             <h1>
-                <span class="en">Welcome</span>
-                <span class="pl">Witaj</span>
+                <span class="en">Welcome!</span>
+                <span class="pl">Witaj!</span>
             </h1>
-            <p>
-                <span class="en">
-                    This is the home of my software projects. I build tools that simplify everyday developer tasks. 
-                    Feel free to explore and download my applications. Simplicity and efficiency are my main goals.
-                </span>
-                <span class="pl">
-                    To jest strona domowa moich projektów. Tworzę narzędzia, które ułatwiają codzienną pracę programisty.
-                    Zapraszam do przeglądania i pobierania moich aplikacji. Prostota i wydajność to moje główne cele.
-                </span>
-            </p>
+            
+            <div class="pl">
+                <p>Ta strona powstała z myślą o użytkownikach MacOS. Też masz dosyć prostych programów, które kosztują krocie w sklepie? Dobrze trafiłeś!</p>
+                <p>Po lewej stronie możesz wybrać aplikację, która Cię interesuje, a następnie możesz ją pobrać.<br>
+                Bez opłat i mikropłatności.<br>
+                Bezpieczne, szyfrowane, sprawdzone.</p>
+                <p>Brakuje Ci aplikacji? Jesteś zainteresowany aplikacją na wyłączność? Napisz do mnie!</p>
+                <p class="signature">~~~ Igor Janicki ~~~</p>
+            </div>
+
+            <div class="en">
+                <p>This site was created with MacOS users in mind. Are you also tired of simple programs that cost a fortune in the App Store? You've come to the right place!</p>
+                <p>On the left, you can choose the application that interests you and then download it.<br>
+                No fees, no microtransactions.<br>
+                Secure, encrypted, verified.</p>
+                <p>Missing an app? Interested in an exclusive application? Write to me!</p>
+                <p class="signature">~~~ Igor Janicki ~~~</p>
+            </div>
         </section>
 
         <section id="myssh">
             <h2>mySSH</h2>
             <div class="app-card">
                 <p>
-                    <span class="en">A lightweight SSH client manager for quick connections.</span>
-                    <span class="pl">Lekki menedżer połączeń SSH dla szybkich logowań.</span>
+                    <span class="en">Simple and fast SSH connection manager.</span>
+                    <span class="pl">Prosty i szybki menedżer połączeń SSH.</span>
                 </p>
-                <a href="#" class="download-btn">Download v1.0</a>
+                <a href="#" class="download-btn">Download .dmg</a>
             </div>
         </section>
 
@@ -189,10 +235,10 @@
             <h2>myIP</h2>
             <div class="app-card">
                 <p>
-                    <span class="en">Instantly check your local and public IP address details.</span>
-                    <span class="pl">Sprawdź natychmiastowo swój lokalny i publiczny adres IP.</span>
+                    <span class="en">Check your local and public IP instantly.</span>
+                    <span class="pl">Sprawdź natychmiast swój lokalny i publiczny adres IP.</span>
                 </p>
-                <a href="#" class="download-btn">Download v1.0</a>
+                <a href="#" class="download-btn">Download .dmg</a>
             </div>
         </section>
 
@@ -200,10 +246,10 @@
             <h2>myEjector</h2>
             <div class="app-card">
                 <p>
-                    <span class="en">Safely eject USB drives with a single hotkey.</span>
-                    <span class="pl">Bezpieczne usuwanie dysków USB jednym skrótem klawiszowym.</span>
+                    <span class="en">Safely eject all external drives with one click.</span>
+                    <span class="pl">Bezpiecznie wysuń wszystkie dyski zewnętrzne jednym kliknięciem.</span>
                 </p>
-                <a href="#" class="download-btn">Download v1.0</a>
+                <a href="#" class="download-btn">Download .dmg</a>
             </div>
         </section>
 
@@ -213,10 +259,10 @@
                 <span class="pl">Kontakt</span>
             </h2>
             <p>
-                Email: twoj-email@example.com <br>
-                GitHub: <a href="https://github.com/TWOJ_LOGIN" style="color: var(--accent-color);">github.com/TWOJ_LOGIN</a>
+                Email: <span style="color:var(--accent-color)">twoj-email@example.com</span>
             </p>
         </section>
+
     </main>
 
     <script>
@@ -225,13 +271,11 @@
             const btn = document.getElementById('lang-btn');
 
             if (body.classList.contains('lang-en')) {
-                // Zmień na Polski
                 body.classList.replace('lang-en', 'lang-pl');
-                btn.innerHTML = '🌐 EN'; // Zmień ikonę przycisku na globus/EN
+                btn.innerHTML = '🌐'; // Ikona dla wersji Polskiej (kliknij by zmienić na świat)
             } else {
-                // Zmień na Angielski
                 body.classList.replace('lang-pl', 'lang-en');
-                btn.innerHTML = '🇵🇱 PL'; // Zmień ikonę przycisku na flagę PL
+                btn.innerHTML = '🇵🇱'; // Ikona dla wersji Angielskiej (kliknij by zmienić na PL)
             }
         }
     </script>
